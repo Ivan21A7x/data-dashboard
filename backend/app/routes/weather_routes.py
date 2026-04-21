@@ -85,19 +85,22 @@ def get_metrics_by_day(
 
 @router.get("/metrics/by-day-full")
 def get_full_metrics_by_day(
+    city: str = None,
     db: Session = Depends(get_db)
 ):
     date_col = func.date(func.to_timestamp(WeatherRecord.timestamp))
-    results = db.query(
+
+    query = db.query(
         date_col.label("date"),
         func.avg(WeatherRecord.temperature).label("avg_temp"),
         func.max(WeatherRecord.temperature).label("max_temp"),
         func.min(WeatherRecord.temperature).label("min_temp")
-    ).group_by(
-        date_col
-    ).order_by(
-        date_col
-    ).all()
+    )
+
+    if city:
+        query = query.filter(WeatherRecord.city == city)
+
+    results = query.group_by(date_col).order_by(date_col).all()
 
     return [
         {

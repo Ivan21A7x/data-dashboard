@@ -6,23 +6,52 @@ import {
     Tooltip,
     ResponsiveContainer,
     CartesianGrid,
+    Legend,
 } from "recharts";
 
 const TemperatureChart = ({ data }) => {
     return (
         <div className="bg-white rounded-2xl shadow p-4 h-75">
-            <h2 className="text-lg font-semibold mb-2">
-                Temperatura promedio por día
+            <h2 className="text-lg font-semibold mb-4">
+                Temperatura por día
             </h2>
 
             <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
+
                     <XAxis dataKey="date" />
                     <YAxis />
+                    
                     <Tooltip />
-                    <Line type="monotone" dataKey="avg_temp" />
+                    <Legend />
+
+                    <Line 
+                        type="monotone" 
+                        dataKey="average_temperature" 
+                        stroke="#3b82f6"
+                        strokeWidth={3}
+                        name="Promedio"
+                    />
+
+                    <Line 
+                        type="monotone" 
+                        dataKey="max_temperature" 
+                        stroke="#ef4444"
+                        strokeWidth={2}
+                        name="Máxima"
+                    />
+
+                    <Line 
+                        type="monotone" 
+                        dataKey="min_temperature" 
+                        stroke="#10b981"
+                        strokeWidth={2}
+                        name="Mínima"
+                    />
                 </LineChart>
+
+                <Legend />
             </ResponsiveContainer>
         </div>
     );
