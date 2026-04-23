@@ -11,20 +11,19 @@ import {
 
 const TemperatureChart = ({ data }) => {
     return (
-        <div className="bg-white rounded-2xl shadow p-4 h-75">
-            <h2 className="text-lg font-semibold mb-4">
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 h-90 pb-10">
+            <h2 className="text-lg font-semibold text-gray-800 mb-4">
                 Temperatura por día
             </h2>
 
             <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={data}>
-                    <CartesianGrid strokeDasharray="3 3" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
 
-                    <XAxis dataKey="date" />
-                    <YAxis />
+                    <XAxis dataKey="date" stroke="#6b7280" />
+                    <YAxis stroke="#6b7280" />
                     
                     <Tooltip />
-                    <Legend />
 
                     <Line 
                         type="monotone" 

@@ -21,18 +21,36 @@ function Dashboard() {
     } = useDashboardData();
 
     if (!latest || !metrics) {
-        return <p className="p-4">Cargando dashboard...</p>;
+        return 
+        <div className="min-h-screen flex items-center justify-center bg-gray-50">
+            <p className="text-gray-500 animate-pulse">Cargando dashboard...</p>
+        </div>
     }
 
     return (
-        <div className="min-h-screen bg-gray-100 p-4">
-            <KPIGrid latest={latest} metrics={metrics} />
-
-            <CitySelector city={city} setCity={setCity} onSearch={handleSearch} />
-
-            <TemperatureChart data={chartData} />
-
+        <div className="min-h-screen bg-gray-50 px-4 py-6">
             <div className="max-w-7xl mx-auto space-y-6">
+
+                {/* Header */}
+                <div>
+                    <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
+                        Weather Dashboard
+                    </h1>
+                    <p className="text-gray-500 text-sm">
+                        Visualización de métricas climáticas en tiempo real
+                    </p>
+                </div>
+
+                <KPIGrid latest={latest} metrics={metrics} />
+
+                <CitySelector 
+                    city={city} 
+                    setCity={setCity} 
+                    onSearch={handleSearch} 
+                />
+
+                <TemperatureChart data={chartData} />
+
                 <DataTable data={tableData} />
 
                 <Pagination
